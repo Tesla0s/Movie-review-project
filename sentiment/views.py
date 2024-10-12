@@ -73,7 +73,7 @@ class IndexView(View):
                 print(f"Вероятность положительного отзыва: {positive_prob}")  # Логирование
 
                 # Присвоение рейтинга
-                rating = int(positive_prob * 10)
+                rating = int(positive_prob * 10) + 1
                 sentiment = "Положительный" if prediction == 1 else "Отрицательный"
                 print(f"Рейтинг: {rating}, Тональность: {sentiment}")  # Логирование
 
