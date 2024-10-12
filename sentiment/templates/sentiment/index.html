@@ -60,7 +60,7 @@
             font-size: 1.2em;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin-top: 10px; /* Added margin for better spacing */
+            margin-top: 10px;
         }
         button:hover {
             background-color: #3700b3;
@@ -73,13 +73,13 @@
             text-align: center;
         }
         .positive {
-            background-color: #4caf50; /* Green */
+            background-color: #4caf50;
         }
         .negative {
-            background-color: #f44336; /* Red */
+            background-color: #f44336; 
         }
         .review-label {
-            font-size: 1.5em; /* Increased font size */
+            font-size: 1.5em; 
             margin-bottom: 10px;
         }
     </style>
@@ -91,7 +91,7 @@
             {% csrf_token %}
             <div class="form-group">
                 <label class="review-label">Ваш отзыв о фильме:</label>
-                <textarea name="review" placeholder="Введите ваш отзыв здесь..." required></textarea>
+                <textarea name="review" placeholder="Введите ваш отзыв здесь (только на английском языке)..." required></textarea>
             </div>
             <button type="submit"><i class="fas fa-star"></i> Оценить</button>
         </form>
