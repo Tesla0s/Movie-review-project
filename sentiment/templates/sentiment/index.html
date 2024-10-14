@@ -1,110 +1,133 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Оценка отзыва о фильме</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 50%;
-            margin: auto;
-            padding: 30px;
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            margin-top: 50px;
-        }
-        h1 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        h2 {
-            text-align: center;
-            font-size: 1.5em;
-            margin-top: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            display: block;
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: #ffffff;
-            font-size: 1em;
-            resize: none;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #6200ea;
-            color: #ffffff;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #3700b3;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            font-size: 1.2em;
-            text-align: center;
-        }
-        .positive {
-            background-color: #4caf50;
-        }
-        .negative {
-            background-color: #f44336; 
-        }
-        .review-label {
-            font-size: 1.5em; 
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Оценка отзыва о фильме</h1>
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label class="review-label">Ваш отзыв о фильме:</label>
-                <textarea name="review" placeholder="Введите ваш отзыв здесь (только на английском языке)..." required></textarea>
-            </div>
-            <button type="submit"><i class="fas fa-star"></i> Оценить</button>
-        </form>
-        
-        {% if sentiment and rating %}
-            <div class="result {% if sentiment == 'Положительный' %}positive{% else %}negative{% endif %}">
-                <h2>Результаты:</h2>
-                <p><strong>Тональность:</strong> {{ sentiment }}</p>
-                <p><strong>Рейтинг:</strong> {{ rating }}/10</p>
-            </div>
-        {% endif %}
-    </div>
-</body>
-</html>
-
-
+ <!DOCTYPE html>
+ <html lang="ru">
+ <head>
+     <meta charset="UTF-8">
+     <title>Оценка отзыва о фильме</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+         body {
+             font-family: 'Helvetica Neue', Arial, sans-serif;
+             background-color: #141414;
+             color: #ffffff;
+             margin: 0;
+             padding: 0;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDh8fG1vdmllfGVufDB8fHx8MTY5MDc1NTA2Mw&ixlib=rb-4.0.3&q=80&w=1920');
+             background-size: cover;
+         }
+         .container {
+             width: 600px; 
+             padding: 30px;
+             background-color: rgba(30, 30, 30, 0.9);
+             border-radius: 10px;
+             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+             text-align: center;
+         }
+         h1 {
+             font-size: 2.5em;
+             margin-bottom: 20px;
+             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+         }
+         h2 {
+             font-size: 1.5em;
+             margin-top: 20px;
+             color: #ffffff;
+         }
+         .form-group {
+             margin-bottom: 20px;
+             text-align: left;
+         }
+         label {
+             font-size: 1.2em;
+             margin-bottom: 10px;
+             display: block;
+             color: #ffffff;
+         }
+         textarea {
+             width: 100%; 
+             height: 200px; 
+             padding: 10px;
+             border: none;
+             border-radius: 5px;
+             background-color: #333;
+             color: #ffffff;
+             font-size: 1em;
+             resize: none;
+             transition: background-color 0.3s ease;
+             box-sizing: border-box; 
+         }
+         textarea:focus {
+             background-color: #444;
+             outline: none;
+         }
+         button {
+             width: 100%; 
+             padding: 10px;
+             border: none;
+             border-radius: 5px;
+             background-color: #6200ea;
+             color: #ffffff;
+             font-size: 1.2em;
+             cursor: pointer;
+             transition: background-color 0.3s ease, transform 0.3s ease;
+             margin-top: 10px; 
+             box-sizing: border-box;
+         }
+         button:hover {
+             background-color: #3700b3;
+             transform: scale(1.05);
+         }
+         .result {
+             margin-top: 20px;
+             padding: 15px;
+             border-radius: 5px;
+             font-size: 1.2em;
+             text-align: center;
+             transition: transform 0.3s ease;
+             width: 100%;
+             background-color: rgba(255, 255, 255, 0.1);
+             box-sizing: border-box;
+         }
+         .positive {
+             background-color: rgba(76, 175, 80, 0.9); 
+             animation: fadeIn 0.5s;
+         }
+         .negative {
+             background-color: rgba(244, 67, 54, 0.9); 
+             animation: fadeIn 0.5s;
+         }
+         .review-label {
+             font-size: 1.5em; 
+             margin-bottom: 10px;
+         }
+         @keyframes fadeIn {
+             from { opacity: 0; }
+             to { opacity: 1; }
+         }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <h1>Оценка отзыва о фильме</h1>
+         <form method="post">
+             {% csrf_token %}
+             <div class="form-group">
+                 <label class="review-label">Ваш отзыв о фильме:</label>
+                 <textarea name="review" placeholder="Введите ваш отзыв здесь (только на английском языке)..." required></textarea>
+             </div>
+             <button type="submit"><i class="fas fa-star"></i> Оценить</button>
+         </form>
+         
+         {% if sentiment and rating %}
+             <div class="result {% if sentiment == 'Положительный' %}positive{% else %}negative{% endif %}">
+                 <h2>Результаты:</h2>
+                 <p><strong>Тональность:</strong> {{ sentiment }}</p>
+                 <p><strong>Рейтинг:</strong> {{ rating }}/10</p>
+             </div>
+         {% endif %}
+     </div>
+ </body>
+ </html>
